@@ -415,6 +415,133 @@
       border:1px solid rgba(215,181,109,.3); color:var(--text); box-shadow:var(--shadow2); opacity:0; pointer-events:none; transition:.28s ease;
     }
     .toast.show{opacity:1; transform:translateX(-50%) translateY(0)}
+    /* ── NEW HERO LAYOUT (image top, content below) ── */
+.hero-image-wrap {
+  position: relative;
+  width: 100%;
+  height: 56vw;       /* aspect-ratio feel */
+  max-height: 520px;
+  min-height: 260px;
+  overflow: hidden;
+}
+.hero-image-wrap .hero-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    url('img/hero.jpg') center/cover no-repeat;
+  transform: none !important; /* disable parallax on this layout */
+}
+.hero-content-below .btn {
+  color: #1a1a1a;
+  border-color: rgba(0,0,0,0.2);
+}
+.hero-content-below {
+  background: #fff;
+  color: #1a1a1a;
+  padding: 32px 0 48px;
+}
+.hero-content-below .hero-inner {
+  display: grid;
+  grid-template-columns: 1.2fr .8fr;
+  gap: 34px;
+  align-items: start;
+  width: min(1280px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 0;
+}
+.hero-content-below .eyebrow {
+  color: #888;
+  margin-bottom: 10px;
+}
+.hero-content-below h2 {
+  font-size: clamp(2.8rem, 6vw, 4.8rem);
+  line-height: 1;
+  margin: 0 0 10px;
+  color: #111;
+}
+.hero-location {
+  color: #666;
+  font-size: 1rem;
+  margin: 0 0 10px;
+}
+.hero-tagline {
+  color: #333;
+  font-size: 1.08rem;
+  line-height: 1.6;
+  margin: 0 0 18px;
+  max-width: 520px;
+}
+.hero-bullets {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 8px;
+  display: grid;
+  gap: 10px;
+}
+.hero-bullets li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #333;
+  font-size: .97rem;
+}
+.hero-bullets li::before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--gold);
+  flex-shrink: 0;
+}
+/* stat pills stay dark on white bg */
+.hero-content-below .hero-stats {
+  margin-top: 24px;
+}
+.hero-content-below .hero-stat {
+  background: rgba(0,0,0,.05);
+  border-color: rgba(0,0,0,.10);
+}
+.hero-content-below .hero-stat strong,
+.hero-content-below .hero-stat span {
+  color: #1a1a1a;
+}
+/* lead card adapts */
+.hero-content-below .lead-card {
+  background: linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.06));
+  border: 1px solid rgba(0,0,0,.12);
+  color: #1a1a1a;
+}
+.hero-content-below .lead-card .tag {
+  background: rgba(0,0,0,.06);
+  border-color: rgba(0,0,0,.10);
+  color: #444;
+}
+.hero-content-below .lead-card h3 { color: #111; }
+.hero-content-below .field input,
+.hero-content-below .field select {
+  background: #f6f4f0;
+  border-color: rgba(0,0,0,.14);
+  color: #1a1a1a;
+}
+.hero-content-below .field input::placeholder { color: #999; }
+.hero-content-below .micro-note { color: #888; }
+
+/* mobile */
+@media (max-width: 760px) {
+  .hero-image-wrap { height: 62vw; max-height: 360px; }
+  .hero-content-below { padding: 22px 0 16px; }
+  .hero-content-below .hero-inner {
+    grid-template-columns: 1fr;
+    width: calc(100% - 24px);
+    gap: 20px;
+  }
+  .hero-content-below h2 { font-size: clamp(2.1rem, 9vw, 2.7rem); }
+  .hero-tagline { font-size: .94rem; }
+  .hero-content-below .hero-stats {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 7px;
+  }
+}
     /* REVEAL */
     .reveal{opacity:0; transform:translateY(26px); transition:opacity .8s ease, transform .8s ease}
     .reveal.visible{opacity:1; transform:translateY(0)}
@@ -467,7 +594,7 @@
       .hero-copy .eyebrow{font-size:.66rem; letter-spacing:.22em; margin-bottom:9px}
       .hero h2{font-size:clamp(2.42rem, 12vw, 3.35rem); line-height:.96; margin-bottom:8px; max-width:340px}
       .hero p{font-size:.92rem; line-height:1.48; margin:0 0 14px; max-width:310px}
-      .hero-copy > p:not(.mobile-hero-subline){display:none}
+      .hero-copy > p:not(.mobile-hero-subline):not(.hero-tagline){display:none}
       .mobile-hero-subline{display:block}
       .hero-copy > .submit-row{display:grid; grid-template-columns:1fr; gap:9px; margin-top:0}
       .hero-gallery-cta{display:none}
@@ -485,7 +612,7 @@
       .lead-card h3::after{font-size:1.22rem}
       .lead-card .submit-row .btn:not([type="submit"]){display:none}
       form{gap:8px}
-      .field input,.field select,.field textarea{min-height:48px; padding:13px 14px; border-radius:13px; font-size:16px}
+      .field input,.field select,.field textarea{min-height:44px; padding:13px 14px; border-radius:13px; font-size:16px}
       .submit-row{display:grid; grid-template-columns:1fr; gap:9px}
       .micro-note{font-size:.72rem; line-height:1.42}
       .tag{padding:7px 10px; font-size:.75rem; line-height:1.25}
@@ -588,7 +715,7 @@
       .image-label strong{font-size:.82rem; margin-bottom:2px}
       .image-label span{font-size:.68rem; line-height:1.3}
 
-      .final-cta{padding:42px 0 92px}
+      .final-cta{padding:42px 0 20px}
       .final-panel{padding:18px; border-radius:22px; gap:14px}
       .final-panel h3{font-size:clamp(2rem, 9vw, 2.75rem); line-height:.98}
       .final-panel p{font-size:.9rem; line-height:1.55}
@@ -601,11 +728,11 @@
       .floating-whatsapp{right:13px; bottom:88px; width:52px; height:52px; z-index:1230}
       .floating-whatsapp svg{width:25px; height:25px}
       .toast{bottom:150px; width:calc(100% - 28px); max-width:380px; text-align:center; border-radius:18px; font-size:.84rem}
-      .modal-backdrop{z-index:1400; padding:12px; align-items:end}
+      .modal-backdrop{z-index:1400; padding:20px 12px 40px; align-items:center}
       .modal{border-radius:24px; max-height:calc(100svh - 24px); overflow:auto}
-      .modal-head{padding:16px 16px 0}
+      .modal-head{padding:12px 16px 0}
       .modal-head h4{font-size:1.35rem}
-      .modal-body{padding:16px}
+      .modal-body{padding:12px}
       .close{width:48px; height:48px; font-size:1.1rem}
     }
     @media (max-width: 430px){
@@ -689,27 +816,47 @@
     </div>
   </div>
 
-  <header class="hero" id="top">
+<!-- Replace your existing <header class="hero" id="top"> ... </header> with this -->
+
+<header id="top">
+  <!-- TOP: Full-width image with nav overlay -->
+  <div class="hero-image-wrap">
     <div class="hero-bg" id="heroBg"></div>
+  </div>
+
+  <!-- BOTTOM: White content section below image -->
+  <div class="hero-content-below">
     <div class="hero-inner">
       <div class="hero-copy reveal">
-        <div class="eyebrow">Godrej Properties Presents</div>
-        <h2 class="serif"><span class="desktop-headline">Godrej Samaris<br/>Ultra Luxury Residences on Golf Course Road</span><span class="mobile-headline">Godrej Samaris</span></h2>
-        <p class="mobile-hero-subline">Ultra luxury residences on Golf Course Road.</p>
-        <div class="submit-row">
+        <div class="eyebrow">Godrej Properties · Authorised Channel Partner</div>
+        <h2 class="serif">
+          <span class="desktop-headline">Godrej <span style="color:var(--gold)">Samaris</span></span>
+          <span class="mobile-headline">Godrej <span style="color:var(--gold)">Samaris</span></span>
+        </h2>
+        <!-- <p class="hero-location">Golf Course Road, Gurgaon</p> -->
+        <p class="hero-tagline">Last ultra luxurious residences on Golf Course Road, Sector-53, Gurgaon.</p>
+
+        <ul class="hero-bullets">
+          <li>Iconic 7.5-Acre Development</li>
+          <li>Total Towers: 5</li>
+          <li>Phase 1 – 2 Towers Only</li>
+          <li>G+36 Ultra-luxury Towers</li>
+        </ul>
+
+        <div class="submit-row" style="margin-top:20px;">
           <button class="btn gold shine" data-open-modal="leadModal">Request Official Details</button>
           <a class="btn" href="#pricing">View Pricing</a>
-          <a class="btn ghost hero-gallery-cta" href="#gallery">View Gallery</a>
         </div>
+
         <div class="hero-stats">
           <div class="hero-stat"><strong>7.5 Acres</strong><span><span class="desktop-stat-label">Land Parcel</span><span class="mobile-stat-label">Acres</span></span></div>
           <div class="hero-stat"><strong>5 Towers</strong><span><span class="desktop-stat-label">Iconic Skyline</span><span class="mobile-stat-label">Towers</span></span></div>
           <div class="hero-stat"><strong>488 Homes</strong><span><span class="desktop-stat-label">Low Density</span><span class="mobile-stat-label">Homes</span></span></div>
-          <div class="hero-stat"><strong>3 & 4 BHK</strong><span><span class="desktop-stat-label">Luxury Residences</span><span class="mobile-stat-label">Residences</span></span></div>
+          <div class="hero-stat"><strong>3 & 4 BHK</strong><span><span class="desktop-stat-label">Luxury Residences</span></span></div>
         </div>
       </div>
 
-      <aside class="lead-card reveal" id="leadCard">
+      <!-- <aside class="lead-card reveal" id="leadCard">
         <div class="tag" style="margin-bottom:14px;">⏳ Pre-launch offer closes in <span class="countdown" id="countdown">47:59:59</span></div>
         <h3 class="serif">Get official details</h3>
         <form id="heroForm">
@@ -728,13 +875,13 @@
           </div>
           <div class="micro-note">By submitting, you agree to be contacted by our sales team via call, WhatsApp, SMS or email.</div>
         </form>
-      </aside>
+      </aside> -->
+
+
+      
     </div>
-    <div class="floating-cta">
-      <div class="floating-badge">50 ft wide balconies · Triple height grand lobby</div>
-      <div class="floating-badge">4.5 acre central greens · Infinity edge pool</div>
-    </div>
-  </header>
+  </div>
+</header>
 
   <section class="section" id="about">
     <div class="container">
@@ -937,8 +1084,36 @@
       </div>
     </div>
   </section>
+<section class="section" style="background:#0d0d0e; padding:60px 0;">
+  <div class="container">
+    <div style="max-width:560px; margin:0 auto;">
+      <div class="eyebrow" style="text-align:center; margin-bottom:12px;">Limited Pre-Launch Window</div>
+      <aside class="lead-card reveal" id="leadCard">
+        <div class="tag" style="margin-bottom:14px;">⏳ Pre-launch offer closes in <span class="countdown" id="countdown2"></span></div>
+        <h3 class="serif">Get official details</h3>
+        <form id="leadSectionForm">
+          <div class="field"><input type="text" name="name" placeholder="Your Name" required></div>
+          <div class="field"><input type="tel" name="phone" placeholder="Mobile Number" required></div>
+          <div class="field">
+            <select name="config" required>
+              <option value="">Select Configuration</option>
+              <option>3 BHK</option>
+              <option>4 BHK</option>
+            </select>
+          </div>
+          <div class="submit-row">
+            <button class="btn gold shine" type="submit">Request Callback</button>
+            <button class="btn" type="button" data-open-modal="brochureModal">Get Brochure</button>
+          </div>
+          <div class="micro-note">By submitting, you agree to be contacted by our sales team via call, WhatsApp, SMS or email.</div>
+        </form>
+      </aside>
+    </div>
+  </div>
+</section>
 
-  <section class="final-cta">
+<section class="final-cta">
+  <!-- <section class="final-cta"> -->
     <div class="container">
       <div class="final-panel reveal">
         <div>
@@ -1196,13 +1371,16 @@
       localStorage.setItem(endKey, endAt);
     }
     function pad(n){ return String(n).padStart(2,'0'); }
-    function updateCountdown(){
-      const diff = Math.max(0, Number(endAt) - Date.now());
-      const h = Math.floor(diff / 3600000);
-      const m = Math.floor((diff % 3600000) / 60000);
-      const s = Math.floor((diff % 60000) / 1000);
-      countdownEl.textContent = `${pad(h)}:${pad(m)}:${pad(s)}`;
-    }
+function updateCountdown(){
+  const diff = Math.max(0, Number(endAt) - Date.now());
+  const h = Math.floor(diff / 3600000);
+  const m = Math.floor((diff % 3600000) / 60000);
+  const s = Math.floor((diff % 60000) / 1000);
+  const text = `${pad(h)}:${pad(m)}:${pad(s)}`;
+  if(countdownEl) countdownEl.textContent = text;
+  const c2 = document.getElementById('countdown2');
+  if(c2) c2.textContent = text;
+}
     updateCountdown();
     setInterval(updateCountdown, 1000);
 
@@ -1211,8 +1389,9 @@
       const y = window.scrollY;
       navbar.classList.toggle('scrolled', y > 18);
       bottomBar.style.display = (window.innerWidth <= 760 && y > 360) ? 'flex' : 'none';
-      heroBg.style.transform = `scale(1.05) translate3d(0, ${Math.min(y * 0.08, 58)}px, 0)`;
-      if (y > 500) scrollShown = true;
+if (heroBg && heroBg.closest('.hero-bg') && !heroBg.closest('.hero-image-wrap')) {
+  heroBg.style.transform = `scale(1.05) translate3d(0, ${Math.min(y * 0.08, 58)}px, 0)`;
+}      if (y > 500) scrollShown = true;
     }, { passive:true });
 
     window.addEventListener('resize', () => {
